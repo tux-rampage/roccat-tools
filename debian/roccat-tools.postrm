@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+#DEBHELPER#
+
+GROUP_NAME=roccat
+
+case "$1" in
+    remove)
+    ;;
+
+    purge)
+        # ignore errors during purge
+        set +e
+        delgroup $GROUP_NAME
+        set -e
+    ;;
+
+    upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # Nothing to do here
+    ;;
+
+    *)
+        echo "$0 called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+

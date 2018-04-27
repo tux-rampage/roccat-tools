@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Roccat mouse configuration
+Name[de]=Roccat maus konfiguration
+Name[es]=Configuración de ratón Roccat
+GenericName=Roccat mouse configuration
+GenericName[de]=Roccat maus konfiguration
+GenericName[es]=Configuración de ratón Roccat
+Comment=Change Roccat mouse settings
+Comment[de]=Roccat maus einstellungen ändern
+Comment[es]=Cambia la configuración del ratón Roccat
+Exec=/usr/bin/roccat_mouse_launcher
+Terminal=false
+Icon=roccat
+Type=Application
+Categories=Settings;Utility;HardwareSettings;

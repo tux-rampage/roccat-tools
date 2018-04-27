@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+killall -9 roccateventhandler &> /dev/null || true
+
+#DEBHELPER#
+

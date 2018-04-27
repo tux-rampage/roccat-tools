@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Roccat keyboard configuration
+Name[de]=Roccat tastatur konfiguration
+Name[es]=Configuración de teclado Roccat
+GenericName=Roccat keyboard configuration
+GenericName[de]=Roccat tastatur konfiguration
+GenericName[es]=Configuración de teclado Roccat
+Comment=Change Roccat keyboard settings
+Comment[de]=Roccat tastatur einstellungen ändern
+Comment[es]=Cambia la configuración del teclado Roccat
+Exec=/usr/bin/roccat_keyboard_launcher
+Terminal=false
+Icon=roccat
+Type=Application
+Categories=Settings;Utility;HardwareSettings;

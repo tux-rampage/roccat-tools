@@ -1,0 +1,22 @@
+Source: roccat-tools
+Section: utils
+Priority: optional
+Maintainer: Arturo Casal <berfenger@bfgnet.net>
+Build-Depends: debhelper (>=9), gcc, cmake, libcanberra-dev, libdbus-glib-1-dev, libgtk2.0-dev, libgudev-1.0-dev, libnotify-dev, libx11-dev, gettext, libsqlite3-dev, lua5.2, liblua5.2-dev, libgaminggear-dev (>= 0.15.1)
+Homepage: http://roccat.sourceforge.net
+
+Package: roccat-tools
+Architecture: any
+Depends: bash, libcanberra0, libdbus-glib-1-2, libgtk2.0-0, libgudev-1.0-0, libnotify4, libx11-6, liblua5.2-0, libgaminggear0 (>= 0.15.1)
+Description: Roccat Tools is a bunch of utilities designed 
+ to configure Roccat mice and keyboards
+ .
+ Supported mice: kone, koneplus, konepure,
+ konepureoptical, konepuremilitary, konextd, 
+ konextdoptical, kova2016, lua, pyra, savu, 
+ tyon, kiro
+ .
+ Supported keyboards: arvo, isku, iskufx, 
+ ryos mk, ryos mk pro, ryos mk fx,
+ ryos tkl pro
+

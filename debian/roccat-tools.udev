@@ -1,0 +1,156 @@
+# Rules for Roccat Arvo gaming keyboard.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="30d4", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="30d4", GROUP="roccat", MODE="0660"
+# Rules for Roccat Isku gaming keyboard.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="319c", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="319c", GROUP="roccat", MODE="0660"
+# Rules for Roccat Isku gaming keyboard.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="3264", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="3264", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kiro mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c38", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c38", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kone gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+
+# If generic hid driver tries to bind: Load module and transfer mouse and keyboard part under kone hid driver control.
+SUBSYSTEM=="hid", DRIVER=="generic-usb", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2ced", ACTION=="add", RUN+="/bin/sh -c '/sbin/modprobe kone || /sbin/modprobe hid-roccat-kone; if test -d /sys/bus/hid/drivers/kone; then /bin/echo -n %k >/sys/bus/hid/drivers/generic-usb/unbind && /bin/echo -n %k >/sys/bus/hid/drivers/kone/bind; fi'"
+SUBSYSTEM=="hid", DRIVER=="hid-generic", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2ced", ACTION=="add", RUN+="/bin/sh -c '/sbin/modprobe kone || /sbin/modprobe hid-roccat-kone; if test -d /sys/bus/hid/drivers/kone; then /bin/echo -n %k >/sys/bus/hid/drivers/hid-generic/unbind && /bin/echo -n %k >/sys/bus/hid/drivers/kone/bind; fi'"
+
+# Changing access rights of devices and sysfs attributes.
+# If group roccat does not exist, group root is used.
+
+# Transfer both evdev event devices to user group roccat.
+SUBSYSTEM=="input",  ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2ced", KERNEL=="event[0-9]*", GROUP="roccat", MODE="0660"
+
+# Transfer roccat event device and drivers sysfs attributes to user group roccat.
+# On kernels prior to 2.6.38 the event device is of class roccat, from
+# 2.6.38 onwards class is named after device name
+SUBSYSTEM=="roccat", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2ced", GROUP="roccat", MODE="0660", RUN +="/bin/sh -c 'ROCCAT_PATH=$(roccatkonecontrol -p); if test $? -eq 0; then chgrp roccat $ROCCAT_PATH/*; fi'"
+SUBSYSTEM=="kone", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2ced", GROUP="roccat", MODE="0660", RUN +="/bin/sh -c 'ROCCAT_PATH=$(roccatkonecontrol -p); if test $? -eq 0; then chgrp roccat $ROCCAT_PATH/*; fi'"
+# Rules for Roccat Kone[+] gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d51", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d51", GROUP="roccat", MODE="0660"
+# Rules for Roccat KonePure gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2dbe", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2dbe", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kone Pure Military/Black mice.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2dbf|2dc2", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2dbf|2dc2", GROUP="roccat", MODE="0660"
+# Rules for Roccat KonePureOptical gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2db4", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2db4", GROUP="roccat", MODE="0660"
+# Rules for Roccat KoneXTD gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e22", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e22", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kone XTD Optical mice.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e23", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e23", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kova 2016 mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2cee|2cef|2cf0", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2cee|2cef|2cf0", GROUP="roccat", MODE="0660"
+# Rules for Roccat Kova[+] gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d50", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d50", GROUP="roccat", MODE="0660"
+# Rules for Roccat Lua gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c2e", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c2e", GROUP="roccat", MODE="0660"
+# Rules for Roccat Nyth mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e7c|2e7d", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e7c|2e7d", GROUP="roccat", MODE="0660"
+# Rules for Roccat Pyra wired and wireless gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c24|2cf6", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2c24|2cf6", GROUP="roccat", MODE="0660"
+# Rules for Roccat RyosMK keyboards.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="3138|31ce|3232", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="3138|31ce|3232", GROUP="roccat", MODE="0660"
+# Rules for Roccat RyosMK FX keyboards.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fda", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fda", GROUP="roccat", MODE="0660"
+# Rules for Roccat RyosTKL keyboards.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="316a", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="316a", GROUP="roccat", MODE="0660"
+# Rules for Roccat Savu gaming mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d5a", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2d5a", GROUP="roccat", MODE="0660"
+# Rules for Roccat Skeltr keyboard.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fc6", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fc6", GROUP="roccat", MODE="0660"
+# Rules for Roccat Sova gaming keyboard.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2f76|2f94", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2f76|2f94", GROUP="roccat", MODE="0660"
+# Rules for Roccat Suora keyboards.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fa8", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2fa8", GROUP="roccat", MODE="0660"
+# Rules for Roccat Tyon mouse.
+# These rules have to be applied after 50-udev-default.rules for mode changes not to be overridden.
+# If group roccat does not exist, group root is used.
+
+SUBSYSTEM=="input", KERNEL=="event[0-9]*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a|2e4b", GROUP="roccat", MODE="0660"
+SUBSYSTEM=="hidraw", KERNEL=="hidraw*", ACTION=="add", ATTRS{idVendor}=="1e7d", ATTRS{idProduct}=="2e4a|2e4b", GROUP="roccat", MODE="0660"

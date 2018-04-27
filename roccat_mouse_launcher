@@ -1,0 +1,56 @@
+#!/bin/bash
+IDS=`lsusb | egrep -o "[a-fA-F0-9]+:[a-fA-F0-9]+"`
+IDSTR=$( IFS=$'
+'; echo "${IDS[*]}" )
+
+echo " Roccat config panel launcher"
+echo "------------------------------"
+
+if [[ $IDS == *1e7d:2ced* ]];then
+	echo "Found: Roccat Kone"
+	roccatkoneconfig
+elif [[ $IDS == *1e7d:2d51* ]];then
+	echo "Found: Roccat Kone Plus"
+	roccatkoneplusconfig
+elif [[ $IDS == *1e7d:2dbe* ]];then
+	echo "Found: Roccat Kone Pure"
+	roccatkonepureconfig
+elif [[ $IDS == *1e7d:2dbf* ]];then
+	echo "Found: Roccat Kone Pure Military"
+	roccatkonepuremilitaryconfig
+elif [[ $IDS == *1e7d:2db4* ]];then
+	echo "Found: Roccat Kone Pure Optical"
+	roccatkonepureopticalconfig
+elif [[ $IDS == *1e7d:2e22* ]];then
+	echo "Found: Roccat Kone XTD"
+	roccatkonextdconfig
+elif [[ $IDS == *1e7d:2e23* ]];then
+	echo "Found: Roccat Kone XTD Optical"
+	roccatkonextdopticalconfig
+elif [[ $IDS == *1e7d:2d50* ]];then
+	echo "Found: Roccat Kova Plus"
+	roccatkovaplusconfig
+elif [[ $IDS == *1e7d:2c2e* ]];then
+	echo "Found: Roccat Lua"
+	roccatluaconfig
+elif [[ $IDS == *1e7d:2c24* ]] || [[ $IDS == *1e7d:2cf6* ]];then
+	echo "Found: Roccat Pyra"
+	roccatpyraconfig
+elif [[ $IDS == *1e7d:2d5a* ]];then
+	echo "Found: Roccat Savu"
+	roccatiskuconfig
+elif [[ $IDS == *1e7d:2e4a* ]] || [[ $IDS == *1e7d:2e4b* ]];then
+	echo "Found: Roccat Tyon"
+	roccattyonconfig
+elif [[ $IDS == *1e7d:2e7c* ]] || [[ $IDS == *1e7d:2e7d* ]];then
+	echo "Found: Roccat Nyth"
+	roccatnythconfig
+elif [[ $IDS == *1e7d:2cee* ]] || [[ $IDS == *1e7d:2cef* ]];then
+	echo "Found: Roccat Kova 2016"
+	roccatkova2016config
+elif [[ $IDS == *1e7d:2c38* ]];then
+	echo "Found: Roccat Kiro"
+	roccatkiroconfig
+else
+	echo "No roccat mouse found."
+fi

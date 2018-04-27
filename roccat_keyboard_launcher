@@ -1,0 +1,35 @@
+#!/bin/bash
+IDS=`lsusb | egrep -o "[a-fA-F0-9]+:[a-fA-F0-9]+"`
+IDSTR=$( IFS=$'
+'; echo "${IDS[*]}" )
+
+echo " Roccat config panel launcher"
+echo "------------------------------"
+
+if [[ $IDS == *1e7d:30d4* ]];then
+	echo "Found: Roccat Arvo"
+	roccatarvoconfig
+elif [[ $IDS == *1e7d:319c* ]];then
+	echo "Found: Roccat Isku"
+	roccatiskuconfig
+elif [[ $IDS == *1e7d:3264* ]];then
+	echo "Found: Roccat Isku FX"
+	roccatiskufxconfig
+elif [[ $IDS == *1e7d:3138* ]] || [[ $IDS == *1e7d:31ce* ]] || [[ $IDS == *1e7d:3232* ]];then
+	echo "Found: Roccat Ryos"
+	roccatryosmkconfig
+elif [[ $IDS == *1e7d:316a* ]];then
+	echo "Found: Roccat Ryos TKL Pro"
+	roccatryostklconfig
+elif [[ $IDS == *1e7d:2fda* ]];then
+	echo "Found: Roccat Ryos MK FX"
+	roccatryosmkfxconfig
+elif [[ $IDS == *1e7d:2fa8* ]];then
+	echo "Found: Roccat Suora"
+	roccatsuoraconfig
+elif [[ $IDS == *1e7d:2fc6* ]];then
+	echo "Found: Roccat Skeltr"
+	roccatskeltrconfig
+else
+	echo "No roccat keyboard found."
+fi

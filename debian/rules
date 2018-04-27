@@ -1,0 +1,56 @@
+#!/usr/bin/make -f
+
+BUILDDIR = build_dir
+
+# secondly called by launchpad
+build:
+	mkdir $(BUILDDIR);
+	cd $(BUILDDIR); cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_LUA=5.2 ..;
+	make -C $(BUILDDIR)
+
+# thirdly called by launchpad
+binary: binary-indep binary-arch
+
+binary-indep:
+	# nothing to be done
+
+binary-arch:
+	dh_testdir -a
+	dh_testroot -a
+	# Copy built binaries
+	cd $(BUILDDIR); export DESTDIR=../debian/tmp; cmake -P cmake_install.cmake
+	# UDEV Rules
+	#mkdir -p debian/tmp/etc/udev/rules.d/
+	#cp udev/*.rules debian/tmp/etc/udev/rules.d/
+	rm -rf debian/tmp/lib/udev
+	
+	# New files
+	cp roccat_mouse_launcher debian/tmp/usr/bin/
+	cp roccat_keyboard_launcher debian/tmp/usr/bin/
+	cp roccat-mouse-launcher.desktop debian/tmp/usr/share/applications/
+	cp roccat-keyboard-launcher.desktop debian/tmp/usr/share/applications/
+	mkdir -p debian/tmp/var/lib/roccat
+	cp device_config debian/tmp/var/lib/roccat/.device_config
+	
+	# Deb package
+	dh_link -a
+	dh_installchangelogs -a
+	dh_installdocs -a
+	dh_installudev -a --priority=90
+	dh_install --sourcedir=debian/tmp -a
+	dh_strip -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_installdeb -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -proccat-tools
+	
+
+# firstly called by launchpad
+clean:
+	rm -f build
+	rm -rf $(BUILDDIR)
+
+.PHONY: binary binary-arch binary-indep clean
+
